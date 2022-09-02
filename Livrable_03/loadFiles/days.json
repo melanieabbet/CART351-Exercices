@@ -1,0 +1,27 @@
+{
+  "Label":"Days consumption",
+
+"Days":
+[
+  { "Num": "Day 1",
+    "Morning": [{ "element": "Apple"},{"element":"Jus"}],
+    "Afternoon": [{ "element": "Spaghetti"}],
+    "Evening":[{ "element": "Sushi"},{"element":"Cake"}]
+  },
+  { "Num": "Day 2",
+    "Morning": [{ "element": "Tee"}],
+    "Afternoon": [{ "element": "Potatoes"},{"element":"Salad"}],
+    "Evening":[{ "element": "Rice"},{"element":"Vegetables"},{"element":"Cookies"}]
+  },
+  { "Num": "Day 3",
+    "Morning": [{ "element": "Tee"},{"element":"Yaourt"},{"element":"Chocolate"}],
+    "Afternoon": [{ "element": "Tomato"},{"element":"Bread"},{"element":"Chicken"}],
+    "Evening":[{ "element": "Soup"}]
+  },
+  { "Num": "Day 4",
+    "Morning": [{ "element": "Coffee"},{"element":"Chocolate"}],
+    "Afternoon": [{ "element": "Chips"}],
+    "Evening":[{ "element": "Pizza"}]
+  }
+]
+}

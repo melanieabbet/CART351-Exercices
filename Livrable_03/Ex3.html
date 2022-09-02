@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+   <title>JSON LOAD EX</title>
+   <link href="https://fonts.googleapis.com/css?family=Tinos:400,700&display=swap" rel="stylesheet">
+  <script src = "jquery/jquery-3.4.1.js"></script>
+   <script>
+   $(document).ready(function(){
+
+
+
+   let header = $('header');
+   let section = $('section');
+   let loaded=false;
+
+   $("#getData").click(function(event){
+
+
+
+          //console.log("clicked");
+//dollar car jquery fonction pas selecteur avant point car aucun
+          $.getJSON('loadFiles/days.json',function(data){
+            //data repres les info qui revienne
+            console.log(data);
+
+            populateHeader(data);
+            showDays(data);
+
+          })
+          .fail(function(){
+            console.log("error");
+          })
+
+
+
+
+
+    });
+    function populateHeader(data){
+          let sampleHeader = $("<h1>");
+          $("#clean").empty();
+          $(sampleHeader).text(data.Label);
+          $(sampleHeader).appendTo(header);
+        }
+
+
+        function showDays(data){
+
+        // our array of each book objects
+        let searchVal = $('#search').val();
+        searchVal = searchVal.toLowerCase();
+
+        $("#cleaning").empty();
+        //$("#clean").empty();
+
+        console.log(searchVal);
+        let days = data['Days'];
+
+        for (var i = 0; i < days.length; i++) {
+          let sampleDayArticle = $('<article>');
+          let sampleDayH2 =$('<h2>');
+          let sampleListMorning= $("<ul>");
+          let sampleListAfternoon= $('<ul id="after">');
+          let sampleListEvening= $('<ul id="even">');
+
+          $(sampleDayH2).text(days[i].Num);
+          $(sampleDayH2).appendTo(sampleDayArticle);
+
+          if(searchVal ==="morning" || searchVal ==="all"){
+            let MorningElement = days[i].Morning;
+            for (let j = 0; j < MorningElement.length; j++) {
+              let listItem = $('<li>');
+              $(listItem).text(MorningElement[j].element);
+              $(listItem).appendTo(sampleListMorning);
+              $(sampleListMorning).appendTo(sampleDayArticle);
+            }
+          }
+          if(searchVal ==="afternoon"|| searchVal ==="all"){
+              let AfternoonElement = days[i].Afternoon;
+              for (let j = 0; j < AfternoonElement.length; j++) {
+                let listItem = $('<li>');
+                $(listItem).text(AfternoonElement[j].element);
+                $(listItem).appendTo(sampleListAfternoon);
+              }
+                $(sampleListAfternoon).appendTo(sampleDayArticle);
+          }
+          if(searchVal ==="evening"||searchVal ==="all"){
+            let EveningElement = days[i].Evening;
+            for (let j = 0; j < EveningElement.length; j++) {
+              let listItem = $('<li>');
+              $(listItem).text(EveningElement[j].element);
+              $(listItem).appendTo(sampleListEvening);
+            }
+            $(sampleListEvening).appendTo(sampleDayArticle);
+          }
+
+          $(section).append(sampleDayArticle);
+        } //books
+      }//function
+
+
+
+ });
+
+   </script>
+  </head>
+
+  <style>
+
+html {
+  font-family: 'helvetica neue', helvetica, arial, sans-serif;
+}
+
+body {
+  width: 100%;
+  background-color: #f5fefa;
+  font-family: 'Tinos', serif;
+}
+/* header styles */
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  margin:10vw;
+  margin-bottom:0;
+  font-size: 3em;
+  color: black;
+}
+h2 {
+  text-align: center;
+  color: black;
+  padding:5%;
+  text-transform: uppercase;
+  border: #86fecd solid 2px;
+
+}
+
+header p {
+  font-weight: bold;
+  margin-left:30vw;
+}
+section{
+  margin:5vw;
+  margin-top:0;
+}
+
+/* section styles */
+
+section article {
+  box-sizing: border-box;
+  width:25%;
+  padding:2%;
+  display: block;
+  float: left;
+}
+
+section p {
+  font-size:1em;
+  font-weight: bold;
+}
+
+section ul {
+  margin:0;
+  margin-top:10%;
+  padding: 5%;
+  background-color: #b8ffe2;
+}
+#even{
+  background-color:#dafdef;
+}
+#after{
+  background-color:#86fecd;
+}
+ li{
+   list-style-type: none;
+   text-align: center;
+   margin: 5%;
+   padding-top: 5%;
+   padding-bottom: 3%;
+   color: black;
+   border: black solid 1px;
+ }
+ .inst{
+   color:black;
+   margin:2%;
+   font-size: 0.6em;
+ }
+
+#getData{
+  background:#86fecd;
+  color: black;
+  border: none;
+  width:100px;
+  margin:2%;
+  margin-top: 0;
+  margin-left: 0;
+  border: #86fecd solid 0.5px;
+}
+#search{
+  border: #86fecd solid 1px;
+  margin:2%;
+  margin-top: 0;
+  margin-right: 0;
+}
+  </style>
+
+  <body>
+    <div class="inst">
+      <p>Choose time: morning, afternoon, evening, all. </p>
+    </div>
+  <input type="text" id="search" name="" value="">
+  <input type="button" id="getData" value="Load Data" />
+      <header id="clean">
+
+      </header>
+
+      <section id="cleaning">
+
+      </section>
+
+
+  </body>
+</html>
